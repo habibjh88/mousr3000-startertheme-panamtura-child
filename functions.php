@@ -1,10 +1,17 @@
 <?php
+require_once get_stylesheet_directory() . '/inc/post-meta.php';
 // Enqueue parent theme styles
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'mousr3000-parent-style', get_template_directory_uri() . '/style.css' );
 } );
 
-
+// Load parent theme style in Gutenberg editor
+add_action('enqueue_block_editor_assets', function () {
+	wp_enqueue_style(
+		'mousr3000-parent-style-editor',
+		get_stylesheet_directory_uri() . '/style.css'
+	);
+});
 add_action( 'init', 'set_random_featured_images_for_posts' );
 
 add_filter( 'excerpt_more', function() {
